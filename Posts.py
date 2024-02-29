@@ -18,7 +18,7 @@ class Posts(ABC):
         try:
             self.likes.append(user)
             if user.username != self._name.username:
-                print(f"Notification to {self._name.username}: {user.username} liked your post")
+                print(f"notification to {self._name.username}: {user.username} liked your post")
                 self._name.add_notify(f"{user.username} liked your post")
         except Exception:
             pass
@@ -27,7 +27,7 @@ class Posts(ABC):
         try:
             self.comments.append('username:' + user.username + 'text:' + text)
             if user.username != self._name.username:
-                print(f"Notification to {self._name.username}: {user.username} commented on your post: {text}")
+                print(f"notification to {self._name.username}: {user.username} commented on your post: {text}")
                 self._name.add_notify(f"{user.username} commented on your post")
         except Exception:
             pass
@@ -36,7 +36,11 @@ class Posts(ABC):
         if self.type_post == "Image":
             return f"{self._name.username} posted a picture\n"
         else:
-            return f"{self.display() or ''}"
+            display_result = self.display()
+            if display_result is not None:
+                return display_result
+            else:
+                return ""
 
 # this is the post with only text
 class TextPost(Posts):
@@ -45,7 +49,7 @@ class TextPost(Posts):
         self.text = text
 
     def display(self):
-        print(f"{self._name.username} published a post:\n\"{self.text}\"\n")
+        print(f"{self._name.username} published a post:\n\"{self.text}\"")
 
 
 # this is the post of sale products

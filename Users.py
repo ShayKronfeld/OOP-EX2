@@ -54,7 +54,8 @@ class Users:
             post = TextPost(self, *args)
         elif post_type == "Image":
             post = ImagePost(self, *args)
-            print(f"{self.username} posted a picture\n")
+            print()
+            print(f"{self.username} posted a picture")
             print()
         elif post_type == "Sale":
             post = SalePost(self, *args)
