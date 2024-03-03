@@ -1,11 +1,14 @@
 from Users import Users
 
+# here we use in singelton design
+
 class SocialNetwork():
     _network = False
 
-    def __init__(self, name):  # Singleton Design Pattern
+    def __init__(self, name):
         if SocialNetwork._network:
             raise RuntimeError("SocialNetwork is already opened")
+
         self.users = []
         self.posts = []
         self.name = name
@@ -18,6 +21,7 @@ class SocialNetwork():
             return None
 
         new_user = Users(username, password)  # Create a new user
+
         if new_user.is_valid(new_user.password):  # check if the password is valid
             self.users.append(new_user)
             #print(f"User '{username}' has been successfully registered!")
@@ -54,17 +58,21 @@ class SocialNetwork():
         else:
             print(f"{username} not found in the social network.")
 
+
     def add_post(self, post):
         self.posts.append(post)
+
 
     def __str__(self):
         print(f"{self.name} social network:")
         return f"{self.display() or ''}"
 
-    def display(self):
-        for user in self.users:
-            print(user)
 
     def print_values_users(self):
         for user in self.users:
             print(f"User name: {user.username}, Number of posts: {len(user.posts)}, Number of followers: {len(user.followers)}")
+
+
+    def display(self):
+        for user in self.users:
+            print(user)
